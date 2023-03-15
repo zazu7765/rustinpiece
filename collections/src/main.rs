@@ -1,12 +1,14 @@
 fn main() {
     basic_array_print();
     arr_slicing();
-//    string_vector();
-//    vector_slicing();
-//    vector_capacity();
+    string_vector();
+    vector_slicing();
+    vector_capacity();
+    tuple_as_args();
 }
 
 fn basic_array_print(){
+    println!("\nArray Printing");
     let array1 = ["one", "two"];
     let myarray = ["a";50];
     println!("Test array: {:?}",array1);
@@ -14,6 +16,7 @@ fn basic_array_print(){
 }
 
 fn arr_slicing(){
+    println!("\nArray Slicing");
     // Indexes start at 0 (thank god)
     // Index ranges are exclusive by default
     let one_to_ten = [1,2,3,4,5,6,7,8,9,10];
@@ -27,6 +30,7 @@ fn arr_slicing(){
 }
 
 fn string_vector(){
+    println!("\nString Vectors:");
     let name1 = String::from("Banana");
     let name2 = String::from("Potato");
     let banana = String::from("banana");
@@ -43,6 +47,7 @@ fn string_vector(){
 }
 
 fn vector_slicing(){
+    println!("\nVector Slicing");
     // can also make vector with macros and other datatypes
     // usually declare vector mutable but in this case using it just to contain not to push to
     let /*mut*/ ten_to_twenty = vec![10,11,12,13,14,15,16,17,18,19,20];
@@ -56,6 +61,7 @@ fn vector_slicing(){
 }
 
 fn vector_capacity(){
+    println!("\nDynamic Vector Resizing");
     /*
     Vectors start at a capacity of 0 elements
     Once one element is pushed, the capacity is set to 4 to accomodate 3 more elements before resizing.
@@ -71,5 +77,15 @@ fn vector_capacity(){
     println!("After three more pushes (4 total): {}",num_vec.capacity());
     num_vec.push(1);
     println!("After one more push: {}",num_vec.capacity());
+}
 
+// tuples are passed and returned in arg functions in rust
+fn tuple_as_args(){
+    println!("\nTuples As Arguments:");
+    let str_vec = vec!["one","two","three"];
+    let(one, two, three) = (str_vec[0],str_vec[1],str_vec[2]);
+    println!("First element is {:?}\nSecond element is {:?}\nThird element is {:?}",one,two,three);
+    let discard_vec = vec!["never touched","i love puppies","potato"];
+    let(_,two, three) = (discard_vec[0], discard_vec[1], discard_vec[2]);
+    println!("First element taken is {:?}\nSecond element taken is {:?}",two, three);
 }
