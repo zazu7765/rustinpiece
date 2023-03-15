@@ -1,7 +1,9 @@
 fn main() {
-//    basic_array_print();
-//    arr_slicing();
-    string_vector();
+    basic_array_print();
+    arr_slicing();
+//    string_vector();
+//    vector_slicing();
+//    vector_capacity();
 }
 
 fn basic_array_print(){
@@ -38,4 +40,36 @@ fn string_vector(){
     better_food_vec.push(potato);
     println!("String vector no type @ init: {:?}", food_vec);
     println!("String vector typed @ init: {:?}", better_food_vec);
+}
+
+fn vector_slicing(){
+    // can also make vector with macros and other datatypes
+    // usually declare vector mutable but in this case using it just to contain not to push to
+    let /*mut*/ ten_to_twenty = vec![10,11,12,13,14,15,16,17,18,19,20];
+    let thirteen_to_fifteen = &ten_to_twenty[2..5];
+    let thirteen_to_sixteen = &ten_to_twenty[2..=5];
+    let start_at_twelve = &ten_to_twenty[1..];
+    let cut_at_fifteen = &ten_to_twenty[..5];
+    let everything_back = &ten_to_twenty[..];
+    println!("Whole vector: {:?}\n13 to 15: {:?}\nStarting from twelve: {:?}\nCut off at 15: {:?}\nBack to everything: {:?}",ten_to_twenty, thirteen_to_fifteen, start_at_twelve, cut_at_fifteen, everything_back);
+    println!("Inclusive thirteen to fifteen (2nd to 5th index): {:?}",thirteen_to_sixteen);
+}
+
+fn vector_capacity(){
+    /*
+    Vectors start at a capacity of 0 elements
+    Once one element is pushed, the capacity is set to 4 to accomodate 3 more elements before resizing.
+    After you hit 4 elements the vector resizes again (this time to 8) to have enough capacity for more elements to be stored.
+    */
+    let mut num_vec:Vec<i32> = Vec::new();
+    println!("Initial Capacity: {}",num_vec.capacity());
+    num_vec.push(1);
+    println!("After one push: {}",num_vec.capacity());
+    num_vec.push(1);
+    num_vec.push(1);
+    num_vec.push(1);
+    println!("After three more pushes (4 total): {}",num_vec.capacity());
+    num_vec.push(1);
+    println!("After one more push: {}",num_vec.capacity());
+
 }
