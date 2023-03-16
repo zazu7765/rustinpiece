@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 fn main() {
     // if_else_one();
     // if_else_two();
