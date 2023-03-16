@@ -6,10 +6,19 @@ enum ThingOneOrThingTwo {
     ThingOne,
     ThingTwo,
 }
+
 enum PickOnePickTwo {
     PickOne(String),
     PickTwo(String),
 }
+
+enum Mood {
+    Happy,
+    Sleepy,
+    Sad,
+    Angry,
+}
+
 fn main() {
     let thing = 2;
     let thing_state = return_one_or_two(thing);
@@ -18,6 +27,10 @@ fn main() {
     let pick_thing = 1;
     let pick_state = return_one_or_two_string(pick_thing);
     check_thing_state_string(&pick_state);
+    println!("Mood Imports!");
+    let mood = Mood::Sleepy;
+    let mood_level = value_mood(&mood);
+    println!("Mood level: {}", mood_level);
 }
 
 fn return_one_or_two(thing: i8) -> ThingOneOrThingTwo {
@@ -45,5 +58,16 @@ fn check_thing_state_string(state: &PickOnePickTwo) {
     match state {
         PickOnePickTwo::PickOne(set_string) => println!("{}", set_string),
         PickOnePickTwo::PickTwo(set_string_two) => println!("{}", set_string_two),
+    }
+}
+
+fn value_mood(mood: &Mood) -> i32 {
+    // use with star imports all things in namespace
+    use Mood::*;
+    match mood {
+        Happy => 100,
+        Sleepy => 50,
+        Sad => 0,
+        Angry => -100,
     }
 }
