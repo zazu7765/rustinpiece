@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 /* enums are very similar to structs visually but function differently
  * structs are for when you want something AND another thing (MANY THINGS TOGETHER)
  * enums are for when you want something OR another thing (MANY CHOICES TOGETHER)
@@ -19,6 +20,13 @@ enum Mood {
     Angry,
 }
 
+enum NumbersAreValid {
+    Zero,
+    One,
+    Two,
+    Three,
+}
+
 fn main() {
     let thing = 2;
     let thing_state = return_one_or_two(thing);
@@ -31,6 +39,8 @@ fn main() {
     let mood = Mood::Sleepy;
     let mood_level = value_mood(&mood);
     println!("Mood level: {}", mood_level);
+    println!("Enums are numbers too!");
+    enums_are_numbers_too();
 }
 
 fn return_one_or_two(thing: i8) -> ThingOneOrThingTwo {
@@ -69,5 +79,13 @@ fn value_mood(mood: &Mood) -> i32 {
         Sleepy => 50,
         Sad => 0,
         Angry => -100,
+    }
+}
+
+fn enums_are_numbers_too() {
+    use NumbersAreValid::*;
+    let numbers = vec![Zero, One, Two, Three];
+    for number in numbers {
+        println!("{}", number as u32);
     }
 }
