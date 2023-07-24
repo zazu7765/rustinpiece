@@ -46,6 +46,14 @@ pub fn match_string_tuple<'a>(sky: &'a str, temp: &'a str) -> &'a str{
     }
 }
 
+pub fn match_guard(bananas: i32, hungry: bool) -> String{
+    match (bananas, hungry) {
+        (bananas, hungry) if hungry == false => format!("Not hungry with {} bananas", bananas),
+        (bananas, hungry) if bananas == 0 && hungry == true => format!("Hungry but no bananas"),
+        _ => format!("Hungry? {}, How many bananas? {}", hungry, bananas),
+    }
+}
+
 mod tests {
     #[test]
     fn check_if_else_one() {
@@ -87,5 +95,15 @@ mod tests {
         let res2 = crate::control_flow::match_string_tuple(p2.0, p2.1);
         assert_eq!(res, "you should grab a jacket");
         assert_eq!(res2, "there's definitely some weather outside");
+    }
+    #[test]
+    fn check_match_guard(){
+        let (p1, p2, p3) = ((20, false),(0, true),(30, true));
+        let res = crate::control_flow::match_guard(p1.0, p1.1);
+        let res2 = crate::control_flow::match_guard(p2.0, p2.1);
+        let res3 = crate::control_flow::match_guard(p3.0, p3.1);
+        assert_eq!(res, "Not hungry with 20 bananas");
+        assert_eq!(res2, "Hungry but no bananas");
+        assert_eq!(res3, "Hungry? true, How many bananas? 30");
     }
 }
