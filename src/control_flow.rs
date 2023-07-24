@@ -24,17 +24,28 @@ pub fn match_case(num: i32) -> String {
     }
 }
 
-pub fn match_as_var(num: i32) -> i32{
-    match num{
+pub fn match_as_var(num: i32) -> i32 {
+    match num {
         0 => 10,
         1 => 11,
         2 => 12,
         3 => 13,
         4 => 14,
         5 => 15,
-        _ => num+10,
+        _ => num + 10,
+    }
 }
+
+pub fn match_string_tuple<'a>(sky: &'a str, temp: &'a str) -> &'a str{
+    match (sky, temp) {
+        ("cloudy", "cold") => "you should grab a jacket",
+        ("cloudy", "warm") => "dont need a jacket!",
+        ("clear", "cold") => "bring a jacket and hope for sun",
+        ("clear", "warm") => "dont need a jacket!",
+        (_, _) => "there's definitely some weather outside",
+    }
 }
+
 mod tests {
     #[test]
     fn check_if_else_one() {
@@ -54,7 +65,7 @@ mod tests {
         assert_eq!(res2, "not positive odd number");
     }
     #[test]
-    fn check_match_case(){
+    fn check_match_case() {
         let (num, num2) = (0, 2);
         let res = crate::control_flow::match_case(num);
         let res2 = crate::control_flow::match_case(num2);
@@ -62,11 +73,19 @@ mod tests {
         assert_eq!(res2, "number is not 0");
     }
     #[test]
-    fn check_match_as_var(){
+    fn check_match_as_var() {
         let (num, num2) = (0, 6);
         let res = crate::control_flow::match_as_var(num);
         let res2 = crate::control_flow::match_as_var(num2);
         assert_eq!(res, 10);
         assert_eq!(res2, 16);
+    }
+    #[test]
+    fn check_match_string_tuple(){
+        let (p1, p2) = (("cloudy","cold"),("banana","potato"));
+        let res = crate::control_flow::match_string_tuple(p1.0, p1.1);
+        let res2 = crate::control_flow::match_string_tuple(p2.0, p2.1);
+        assert_eq!(res, "you should grab a jacket");
+        assert_eq!(res2, "there's definitely some weather outside");
     }
 }
